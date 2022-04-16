@@ -8,11 +8,12 @@ import Toggle from "./components/Toggle";
 function App() {
   const componentsArray = [
     <Toggle />,
-    <Tab tabs={["감자", "고구마", "카레라이스", "피자"]} />,
-    <Slider />,
+    <Tab tabs={["한식", "중식", "양식", "일식"]} />,
+    <Slider buttons={["0", "25", "50", "75", "100"]} />,
     <Input />,
     <Dropdown />,
   ];
+
   return (
     <div>
       {componentsArray.map((component, idx) => (

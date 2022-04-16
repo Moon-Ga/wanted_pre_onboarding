@@ -1,0 +1,3 @@
+input[type=range]::-webkit-slider-container{
+    /* background: red; */
+}

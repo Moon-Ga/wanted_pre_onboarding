@@ -5,9 +5,8 @@ const Tab = ({ tabs }) => {
   const sliderRef = useRef();
   const switchTab = (idx) => {
     const tab = (100 / tabs.length) * idx;
-    const from = sliderRef.current.classList.item(1);
-    const to = `left-[${tab}%]`;
-    sliderRef.current.classList.replace(from, to);
+    const left = tab + "%";
+    sliderRef.current.style.left = left;
     setSelected(idx);
   };
 
@@ -18,11 +17,11 @@ const Tab = ({ tabs }) => {
           <div
             key={idx}
             onClick={() => switchTab(idx)}
-            className={
+            className={`flex justify-center items-center w-[170px] h-[30px] cursor-pointer ${
               selected === idx
-                ? "w-[170px] h-[30px] text-center text-lg"
-                : "w-[170px] h-[30px] text-center text-sm"
-            }
+                ? "text-xl text-cyan-500 font-bold"
+                : "text-gray-400"
+            }`}
           >
             {tab}
           </div>
@@ -31,7 +30,8 @@ const Tab = ({ tabs }) => {
       <div className="relative w-full h-2 bg-gray-300">
         <div
           ref={sliderRef}
-          className="absolute left-0 w-1/4 h-full bg-cyan-500 transition-all"
+          style={{ width: `${100 / tabs.length}%`, left: "0%" }}
+          className="absolute h-full bg-cyan-500 transition-[left]"
         />
       </div>
     </div>
