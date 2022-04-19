@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input[type="range"]::-webkit-slider-container {
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  @apply rounded-md;
+  @apply h-[10px];
+}
+input[type="range"]::-webkit-slider-thumb {
+  margin-top: -4px;
+  height: 19px;
+  width: 19px;
+  border-radius: 15px;
+  @apply bg-cyan-500;
+  cursor: pointer;
+  appearance: none;
+}
