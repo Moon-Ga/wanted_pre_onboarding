@@ -19,7 +19,7 @@ function App() {
       {componentsArray.map((component, idx) => (
         <div
           key={idx}
-          className="w-full h-[20vh] flex justify-center items-center border-2"
+          className="w-full h-[30vh] flex justify-center items-center border-2"
         >
           {component}
         </div>

@@ -34,7 +34,7 @@ const Slider = ({ buttons }) => {
   }, [buttons]);
 
   return (
-    <div className="flex flex-col justify-center items-center w-[300px] h-[100px]">
+    <div className="flex flex-col justify-center items-center w-[300px]">
       <div className="text-lg text-center p-1 w-[calc(50%+15px)] border-2 translate-x-[7.5px]">
         {value}%
       </div>
