@@ -2,7 +2,9 @@ import { useRef, useState } from "react";
 
 const Tab = ({ tabs }) => {
   const [selected, setSelected] = useState(0);
+
   const sliderRef = useRef();
+
   const switchTab = (idx) => {
     const tab = (100 / tabs.length) * idx;
     const left = tab + "%";
@@ -17,7 +19,15 @@ const Tab = ({ tabs }) => {
           <div
             key={idx}
             onClick={() => switchTab(idx)}
-            className={`flex justify-center items-center w-[170px] h-[30px] cursor-pointer ${
+            className={`flex justify-center items-center ${
+              tabs.length < 4
+                ? "w-[130px]"
+                : tabs.length < 6
+                ? "w-[110px]"
+                : tabs.length < 8
+                ? "w-[90px]"
+                : "w-[70px]"
+            } h-[30px] cursor-pointer ${
               selected === idx
                 ? "text-xl text-cyan-500 font-bold"
                 : "text-gray-400 hover:text-cyan-400"

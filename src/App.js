@@ -8,10 +8,10 @@ import { countryList } from "./DropdownData";
 
 function App() {
   const componentsArray = [
-    <Toggle />,
+    <Toggle label={["야", "호"]} />,
     <Tab tabs={["한식", "중식", "양식", "일식"]} />,
-    <Slider buttons={["0", "25", "50", "75", "100"]} />,
-    <Dropdown list={countryList} />,
+    <Slider max={10} step={0.1} buttons={["0", "2.5", "5", "7.5", "10"]} />,
+    <Dropdown list={countryList} direction="up" />,
     <Input />,
   ];
 
@@ -20,7 +20,7 @@ function App() {
       {componentsArray.map((component, idx) => (
         <div
           key={idx}
-          className="w-full min-h-[200px] h-[20vh] flex justify-center items-center border-2"
+          className="min-w-[768px] w-full min-h-[200px] h-[20vh] flex justify-center items-center border-2"
         >
           {component}
         </div>

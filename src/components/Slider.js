@@ -1,7 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const Slider = ({ buttons }) => {
+const Slider = ({
+  max = 100,
+  step = 1,
+  buttons = ["0", "25", "50", "75", "100"],
+}) => {
   const [value, setValue] = useState(0);
+
+  const sliderRef = useRef();
 
   const changeValue = (e) => {
     let value;
@@ -11,15 +17,20 @@ const Slider = ({ buttons }) => {
       value = e.target.innerText;
     }
     setValue(value);
-    document.querySelector(
-      "#slider"
-    ).style.backgroundImage = `linear-gradient(to right,rgb(6 182 212) ${value}%, rgb(209 213 219) ${value}%)`;
+
+    paintButton(value);
+  };
+
+  const paintButton = (value) => {
+    const ratio = (100 / max) * value;
+    sliderRef.current.style.backgroundImage = `linear-gradient(to right,rgb(6 182 212) ${ratio}%, rgb(209 213 219) ${ratio}%)`;
+
     for (let i in buttons) {
       const left = (100 / (buttons.length - 1)) * i;
       const step = document.querySelector(`#step${i}`);
-      if (value >= left && !step.style.backgroundColor) {
+      if (ratio >= left && !step.style.backgroundColor) {
         step.style.backgroundColor = "rgb(6 182 212)";
-      } else if (value < left && step.style.backgroundColor) {
+      } else if (ratio < left && step.style.backgroundColor) {
         step.style.backgroundColor = "";
       }
     }
@@ -36,11 +47,14 @@ const Slider = ({ buttons }) => {
   return (
     <div className="flex flex-col justify-center items-center w-[300px]">
       <div className="text-lg text-center p-1 w-[calc(50%+15px)] border-2 translate-x-[7.5px]">
-        {value}%
+        {value}
       </div>
       <div className="relative w-full">
         <input
+          ref={sliderRef}
           id="slider"
+          max={max}
+          step={step}
           value={value}
           type="range"
           onChange={changeValue}

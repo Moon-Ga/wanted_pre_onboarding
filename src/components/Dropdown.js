@@ -4,8 +4,8 @@ const Dropdown = ({ list, direction = "down" }) => {
   const [dropdownList, setdropdownList] = useState(list);
   const [selected, setSelected] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const containerRef = useRef();
 
+  const containerRef = useRef();
   const searchInputRef = useRef();
 
   const filterList = (e) => {
@@ -55,13 +55,13 @@ const Dropdown = ({ list, direction = "down" }) => {
           className="border-2 w-full pl-2 cursor-pointer focus:outline-none"
         />
         <span className="material-icons h-full border-2 absolute right-0 cursor-pointer">
-          {direction === "down"
+          {direction === "up"
             ? showDropdown
-              ? "expand_less"
-              : "expand_more"
+              ? "expand_more"
+              : "expand_less"
             : showDropdown
-            ? "expand_more"
-            : "expand_less"}
+            ? "expand_less"
+            : "expand_more"}
         </span>
       </div>
       {showDropdown && (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Toggle = () => {
+const Toggle = ({ label = ["기본", "상세"] }) => {
   const [isToggled, setIsToggled] = useState(false);
 
   const toggleClick = (e) => setIsToggled(!e.currentTarget.control.checked);
@@ -22,14 +22,14 @@ const Toggle = () => {
             isToggled ? "text-gray-400" : "text-lg font-bold"
           }`}
         >
-          기본
+          {label[0]}
         </span>
         <span
           className={`z-10 ${
             !isToggled ? "text-gray-400" : "text-lg font-bold"
           }`}
         >
-          상세
+          {label[1]}
         </span>
       </label>
       <input id="toggle" type="checkbox" className="appearance-none" />
