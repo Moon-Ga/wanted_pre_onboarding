@@ -44,7 +44,7 @@ const Slider = ({ buttons }) => {
           value={value}
           type="range"
           onChange={changeValue}
-          className="appearance-none w-[calc(100%+15px)] rounded-lg bg-gray-300"
+          className="appearance-none w-[calc(100%+15px)] rounded-lg bg-gray-300 cursor-pointer"
         />
         {buttons.map((button, idx) => (
           <span
@@ -60,7 +60,7 @@ const Slider = ({ buttons }) => {
             key={idx}
             id={`button${idx}`}
             onClick={changeValue}
-            className="step flex justify-center items-center text-xs w-[45px] h-[20px] rounded-xl border-2 cursor-pointer"
+            className="step flex justify-center items-center text-xs w-[45px] h-[20px] rounded-xl border-2 cursor-pointer hover:bg-gray-100"
           >
             {button}
           </div>

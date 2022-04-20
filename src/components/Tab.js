@@ -20,7 +20,7 @@ const Tab = ({ tabs }) => {
             className={`flex justify-center items-center w-[170px] h-[30px] cursor-pointer ${
               selected === idx
                 ? "text-xl text-cyan-500 font-bold"
-                : "text-gray-400"
+                : "text-gray-400 hover:text-cyan-400"
             }`}
           >
             {tab}

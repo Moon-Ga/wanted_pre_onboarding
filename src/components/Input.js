@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 
 const Input = () => {
   const [isValid, setIsValid] = useState({ email: false, password: false });
+  const [invalidAlert, setInvalidAlert] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const passwordRef = useRef();
 
   const onEmailChange = (e) => {
@@ -11,22 +13,20 @@ const Input = () => {
   const onEmailBlur = (e) => {
     if (isValid.email) {
       e.target.classList.remove("border-red-500");
-      e.target.parentElement.nextSibling.classList.replace("visible", "hidden");
+      setInvalidAlert(false);
     } else {
       e.target.classList.add("border-red-500");
-      e.target.parentElement.nextSibling.classList.replace("hidden", "visible");
+      setInvalidAlert(true);
     }
   };
 
-  const togglePasswordVisibility = (e) => {
-    if (passwordRef.current.type === "password") {
-      passwordRef.current.type = "text";
-      e.target.classList.replace("text-gray-300", "text-cyan-500");
-      e.target.innerText = "visibility";
-    } else {
+  const togglePasswordVisibility = () => {
+    if (passwordVisible) {
       passwordRef.current.type = "password";
-      e.target.classList.replace("text-cyan-500", "text-gray-300");
-      e.target.innerText = "visibility_off";
+      setPasswordVisible(false);
+    } else {
+      passwordRef.current.type = "text";
+      setPasswordVisible(true);
     }
   };
 
@@ -39,7 +39,7 @@ const Input = () => {
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
           title="Type your Email."
           placeholder="name@example.com"
-          className="focus:outline-none w-full pl-2 pr-8 border-2 leading-loose placeholder:italic"
+          className="w-full pl-2 pr-8 border-2 leading-loose placeholder:italic focus:outline-cyan-500"
           onChange={onEmailChange}
           onBlur={onEmailBlur}
         />
@@ -51,7 +51,9 @@ const Input = () => {
           check_circle
         </span>
       </div>
-      <span className="hidden text-xs text-red-500">Invalid Email Type</span>
+      {invalidAlert && (
+        <span className="text-xs text-red-500">Invalid Email Type</span>
+      )}
       <div className="relative mt-2 before:content-['Password'] before:text-xs">
         <input
           required
@@ -59,13 +61,15 @@ const Input = () => {
           type="password"
           title="Type your password."
           placeholder="Password"
-          className="focus:outline-none w-full pl-2 pr-8 border-2 leading-loose placeholder:italic"
+          className="w-full pl-2 pr-8 border-2 leading-loose placeholder:italic focus:outline-cyan-500"
         />
         <span
           onClick={togglePasswordVisibility}
-          className="material-icons absolute right-1 translate-y-1/4 text-gray-300"
+          className={`material-icons absolute right-1 translate-y-1/4 ${
+            passwordVisible ? "text-cyan-500" : "text-gray-300"
+          } cursor-pointer`}
         >
-          visibility_off
+          {passwordVisible ? "visibility" : "visibility_off"}
         </span>
       </div>
     </div>
