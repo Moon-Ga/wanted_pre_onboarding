@@ -205,3 +205,16 @@ export const countryList = [
   "Zambia",
   "Zimbabwe",
 ];
+
+export const kboTeamList = [
+  "KT 위즈(kt wiz)",
+  "두산 베어스(DOOSAN BEARS)",
+  "삼성 라이온즈(Samsung Lions)",
+  "LG 트윈스(LG TWINS)",
+  "키움 히어로즈(Kiwoom Heroes)",
+  "SSG 랜더스(SSG Landers)",
+  "NC 다이노스(NC Dinos)",
+  "롯데 자이언츠(LOTTE Giants)",
+  "KIA 타이거즈(KIA TIGERS)",
+  "한화 이글스(Hanwha Eagles)",
+];

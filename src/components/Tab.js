@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
 
-const Tab = ({ tabs }) => {
+const Tab = ({ tabs = [1, 2, 3] }) => {
   const [selected, setSelected] = useState(0);
 
   const sliderRef = useRef();
+
+  const tabWidth = `${100 / tabs.length}%`;
 
   const switchTab = (idx) => {
     const tab = (100 / tabs.length) * idx;
@@ -40,7 +42,7 @@ const Tab = ({ tabs }) => {
       <div className="relative w-full h-2 bg-gray-300">
         <div
           ref={sliderRef}
-          style={{ width: `${100 / tabs.length}%`, left: "0%" }}
+          style={{ width: tabWidth, left: "0%" }}
           className="absolute h-full bg-cyan-500 transition-[left]"
         />
       </div>

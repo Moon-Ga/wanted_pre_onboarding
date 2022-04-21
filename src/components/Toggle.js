@@ -32,7 +32,7 @@ const Toggle = ({ label = ["기본", "상세"] }) => {
           {label[1]}
         </span>
       </label>
-      <input id="toggle" type="checkbox" className="appearance-none" />
+      <input id="toggle" type="checkbox" className="hidden" />
     </>
   );
 };

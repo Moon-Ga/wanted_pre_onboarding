@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const Dropdown = ({ list, direction = "down" }) => {
+const Dropdown = ({ placeholder, list, direction = "down" }) => {
   const [dropdownList, setdropdownList] = useState(list);
   const [selected, setSelected] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -36,7 +36,6 @@ const Dropdown = ({ list, direction = "down" }) => {
       setShowDropdown(false);
     }
   }, []);
-
   useEffect(() => {
     if (showDropdown) {
       document.addEventListener("click", outerClick);
@@ -50,11 +49,17 @@ const Dropdown = ({ list, direction = "down" }) => {
       <div onClick={toggleDropdownList} className="relative">
         <input
           readOnly
-          placeholder="Select Your Country"
+          placeholder={placeholder}
           value={selected}
-          className="border-2 w-full pl-2 cursor-pointer focus:outline-none"
+          className={`border-2 w-full pl-2 ${
+            showDropdown ? "border-cyan-500" : ""
+          } cursor-pointer focus:outline-none`}
         />
-        <span className="material-icons h-full border-2 absolute right-0 cursor-pointer">
+        <span
+          className={`material-icons h-full border-2 absolute right-0 ${
+            showDropdown ? "border-cyan-500" : ""
+          } cursor-pointer`}
+        >
           {direction === "up"
             ? showDropdown
               ? "expand_more"

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const Slider = ({
   max = 100,
@@ -7,42 +7,24 @@ const Slider = ({
 }) => {
   const [value, setValue] = useState(0);
 
-  const sliderRef = useRef();
+  const ratio = (100 / max) * value;
+
+  const sliderBackground = `linear-gradient(to right,rgb(6 182 212) ${ratio}%, rgb(209 213 219) ${ratio}%)`;
+  const buttonBackground = (idx) => {
+    if (ratio >= (100 / (buttons.length - 1)) * idx) {
+      return "rgb(6 182 212)";
+    }
+  };
 
   const changeValue = (e) => {
     let value;
-    if (e.target.id === "slider") {
+    if (e.target.type === "range") {
       value = e.target.value;
     } else {
       value = e.target.innerText;
     }
     setValue(value);
-
-    paintButton(value);
   };
-
-  const paintButton = (value) => {
-    const ratio = (100 / max) * value;
-    sliderRef.current.style.backgroundImage = `linear-gradient(to right,rgb(6 182 212) ${ratio}%, rgb(209 213 219) ${ratio}%)`;
-
-    for (let i in buttons) {
-      const left = (100 / (buttons.length - 1)) * i;
-      const step = document.querySelector(`#step${i}`);
-      if (ratio >= left && !step.style.backgroundColor) {
-        step.style.backgroundColor = "rgb(6 182 212)";
-      } else if (ratio < left && step.style.backgroundColor) {
-        step.style.backgroundColor = "";
-      }
-    }
-  };
-
-  useEffect(() => {
-    for (let i in buttons) {
-      const left = (100 / (buttons.length - 1)) * i;
-      const step = document.querySelector(`#step${i}`);
-      step.style.left = left + "%";
-    }
-  }, [buttons]);
 
   return (
     <div className="flex flex-col justify-center items-center w-[300px]">
@@ -51,20 +33,22 @@ const Slider = ({
       </div>
       <div className="relative w-full">
         <input
-          ref={sliderRef}
-          id="slider"
           max={max}
           step={step}
           value={value}
           type="range"
           onChange={changeValue}
           className="appearance-none w-[calc(100%+15px)] rounded-lg bg-gray-300 cursor-pointer"
+          style={{ backgroundImage: sliderBackground }}
         />
         {buttons.map((button, idx) => (
           <span
             key={idx}
-            id={`step${idx}`}
             className="absolute top-1/4 w-[15px] h-[15px] rounded-full bg-gray-300 -z-10"
+            style={{
+              left: (100 / (buttons.length - 1)) * idx + "%",
+              backgroundColor: buttonBackground(idx),
+            }}
           />
         ))}
       </div>
@@ -72,9 +56,8 @@ const Slider = ({
         {buttons.map((button, idx) => (
           <div
             key={idx}
-            id={`button${idx}`}
             onClick={changeValue}
-            className="step flex justify-center items-center text-xs w-[45px] h-[20px] rounded-xl border-2 cursor-pointer hover:bg-gray-100"
+            className="flex justify-center items-center text-xs w-[45px] h-[20px] rounded-xl border-2 cursor-pointer hover:bg-gray-100"
           >
             {button}
           </div>
