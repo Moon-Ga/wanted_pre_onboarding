@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Slider = ({
-  max = 100,
-  step = 1,
-  buttons = ["0", "25", "50", "75", "100"],
-}) => {
-  const [value, setValue] = useState(0);
+const Slider = ({ min = 0, max = 100, step = 1, buttonCount = 5 }) => {
+  const [value, setValue] = useState(min);
+  const [buttons, setButtons] = useState([]);
 
-  const ratio = (100 / max) * value;
+  useEffect(() => {
+    const buttons = [min];
+    for (let i = 1; i < buttonCount; i++) {
+      buttons.push(((max - min) / (buttonCount - 1)) * i + min);
+    }
+    setButtons(buttons);
+  }, [buttonCount, max, min]);
+
+  useEffect(() => {});
+
+  const ratio = (100 / (max - min)) * (value - min);
 
   const sliderBackground = `linear-gradient(to right,rgb(6 182 212) ${ratio}%, rgb(209 213 219) ${ratio}%)`;
   const buttonBackground = (idx) => {
-    if (ratio >= (100 / (buttons.length - 1)) * idx) {
+    if (ratio >= (100 / (buttonCount - 1)) * idx) {
       return "rgb(6 182 212)";
     }
   };
@@ -28,11 +35,12 @@ const Slider = ({
 
   return (
     <div className="flex flex-col justify-center items-center w-[300px]">
-      <div className="text-lg text-center p-1 w-[calc(50%+15px)] border-2 translate-x-[7.5px]">
+      <div className="text-lg text-center p-1 w-[calc(50%+15px)] border-2 translate-x-[7.5px] overflow-hidden">
         {value}
       </div>
       <div className="relative w-full">
         <input
+          min={min}
           max={max}
           step={step}
           value={value}
@@ -46,7 +54,7 @@ const Slider = ({
             key={idx}
             className="absolute top-1/4 w-[15px] h-[15px] rounded-full bg-gray-300 -z-10"
             style={{
-              left: (100 / (buttons.length - 1)) * idx + "%",
+              left: (100 / (buttonCount - 1)) * idx + "%",
               backgroundColor: buttonBackground(idx),
             }}
           />
@@ -57,7 +65,7 @@ const Slider = ({
           <div
             key={idx}
             onClick={changeValue}
-            className="flex justify-center items-center text-xs w-[45px] h-[20px] rounded-xl border-2 cursor-pointer hover:bg-gray-100"
+            className="flex justify-center items-center text-xs w-[45px] h-[20px] rounded-xl border-2 overflow-hidden cursor-pointer hover:bg-gray-100"
           >
             {button}
           </div>

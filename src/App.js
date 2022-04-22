@@ -4,13 +4,13 @@ import Input from "./components/Input";
 import Slider from "./components/Slider";
 import Tab from "./components/Tab";
 import Toggle from "./components/Toggle";
-import { countryList, kboTeamList } from "./DropdownData";
+import { countryList, kboTeamList } from "./data/DropdownData";
 
 function App() {
   const componentsArray = [
     <>
       <Toggle />
-      <Toggle label={["OFF", "ON"]} />
+      <Toggle usage="hello" label={["OFF", "ON"]} disabled={true} />
     </>,
     <>
       <Tab />
@@ -18,7 +18,7 @@ function App() {
     </>,
     <>
       <Slider />
-      <Slider max={10} step={0.1} buttons={["0", "2.5", "5", "7.5", "10"]} />
+      <Slider min={0} max={5} step={0.1} buttonCount={6} />
     </>,
     <>
       <Dropdown list={countryList} placeholder="Select Your Country" />
