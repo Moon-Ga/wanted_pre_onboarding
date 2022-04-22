@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const Dropdown = ({ placeholder, list, direction = "down" }) => {
+const Dropdown = ({ list, placeholder, direction = "down" }) => {
   const [dropdownList, setdropdownList] = useState(list);
   const [selected, setSelected] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -36,6 +36,7 @@ const Dropdown = ({ placeholder, list, direction = "down" }) => {
       setShowDropdown(false);
     }
   }, []);
+
   useEffect(() => {
     if (showDropdown) {
       document.addEventListener("click", outerClick);

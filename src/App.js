@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import Dropdown from "./components/Dropdown";
 import Input from "./components/Input";
@@ -7,10 +8,24 @@ import Toggle from "./components/Toggle";
 import { countryList, kboTeamList } from "./data/DropdownData";
 
 function App() {
+  const [infoToggle, setInfoToggle] = useState(false);
+  const [disabledToggle, setDisabledToggle] = useState(false);
+
   const componentsArray = [
     <>
-      <Toggle />
-      <Toggle usage="hello" label={["OFF", "ON"]} disabled={true} />
+      <Toggle
+        usage="description"
+        isToggled={infoToggle}
+        setIsToggled={setInfoToggle}
+        label={["기본", "상세"]}
+      />
+      <Toggle
+        usage="disabled"
+        isToggled={disabledToggle}
+        setIsToggled={setDisabledToggle}
+        label={["It's", "Disabled"]}
+        disabled={true}
+      />
     </>,
     <>
       <Tab />

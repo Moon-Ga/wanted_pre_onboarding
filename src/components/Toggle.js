@@ -1,18 +1,15 @@
-import { useState } from "react";
-
 const Toggle = ({
-  usage = "toggle",
-  label = ["기본", "상세"],
+  usage,
+  isToggled,
+  setIsToggled,
+  label,
   disabled = false,
 }) => {
-  const [isToggled, setIsToggled] = useState(false);
-
-  const toggleClick = (e) => setIsToggled(!e.currentTarget.control.checked);
+  const changeToggle = (e) => setIsToggled(e.target.checked);
 
   return (
     <>
       <label
-        onClick={toggleClick}
         htmlFor={usage}
         className="relative flex justify-around items-center w-[400px] h-[50px] rounded-full bg-gray-300 cursor-pointer"
       >
@@ -24,19 +21,26 @@ const Toggle = ({
         <span
           className={`z-10 ${
             isToggled ? "text-gray-400" : "text-lg font-bold"
-          }`}
+          } select-none`}
         >
-          {label[0]}
+          {label && label[0]}
         </span>
         <span
           className={`z-10 ${
             isToggled ? "text-lg font-bold" : "text-gray-400"
-          }`}
+          } select-none`}
         >
-          {label[1]}
+          {label && label[1]}
         </span>
       </label>
-      <input id={usage} type="checkbox" className="" disabled={disabled} />
+      <input
+        id={usage}
+        checked={isToggled}
+        onChange={changeToggle}
+        type="checkbox"
+        disabled={disabled}
+        className="hidden"
+      />
     </>
   );
 };
