@@ -8,21 +8,30 @@ import Toggle from "./components/Toggle";
 import { countryList, kboTeamList } from "./data/DropdownData";
 
 function App() {
-  const [infoToggle, setInfoToggle] = useState(false);
-  const [disabledToggle, setDisabledToggle] = useState(false);
+  const [firstToggle, setFirstToggle] = useState(false);
+  const [secondToggle, setSecondToggle] = useState(false);
+
+  const [firstSlider, setFirstSlider] = useState(0);
+  const [secondSlider, setSecondSlider] = useState(0);
+
+  const [firstDropdown, setFirstDropdown] = useState("");
+  const [secondDropdown, setSecondDropdown] = useState("");
+
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
 
   const componentsArray = [
     <>
       <Toggle
         usage="description"
-        isToggled={infoToggle}
-        setIsToggled={setInfoToggle}
+        isToggled={firstToggle}
+        setIsToggled={setFirstToggle}
         label={["기본", "상세"]}
       />
       <Toggle
         usage="disabled"
-        isToggled={disabledToggle}
-        setIsToggled={setDisabledToggle}
+        isToggled={secondToggle}
+        setIsToggled={setSecondToggle}
         label={["It's", "Disabled"]}
         disabled={true}
       />
@@ -32,18 +41,37 @@ function App() {
       <Tab tabs={["전체", "한식", "중식", "양식", "일식", "분식"]} />
     </>,
     <>
-      <Slider />
-      <Slider min={0} max={5} step={0.1} buttonCount={6} />
+      <Slider value={firstSlider} setValue={setFirstSlider} />
+      <Slider
+        value={secondSlider}
+        setValue={setSecondSlider}
+        min={1}
+        max={5}
+        step={0.1}
+        buttonCount={5}
+      />
     </>,
     <>
-      <Dropdown list={countryList} placeholder="Select Your Country" />
       <Dropdown
+        selected={firstDropdown}
+        setSelected={setFirstDropdown}
+        list={countryList}
+        placeholder="Select Your Country"
+      />
+      <Dropdown
+        selected={secondDropdown}
+        setSelected={setSecondDropdown}
         list={kboTeamList}
         placeholder="Select Your Team"
         direction="up"
       />
     </>,
-    <Input />,
+    <Input
+      inputEmail={inputEmail}
+      setInputEmail={setInputEmail}
+      inputPassword={inputPassword}
+      setInputPassword={setInputPassword}
+    />,
   ];
 
   return (

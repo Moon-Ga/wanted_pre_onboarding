@@ -1,8 +1,18 @@
 import { useEffect, useState } from "react";
 
-const Slider = ({ min = 0, max = 100, step = 1, buttonCount = 5 }) => {
-  const [value, setValue] = useState(min);
+const Slider = ({
+  value,
+  setValue,
+  min = 0,
+  max = 100,
+  step = 1,
+  buttonCount = 5,
+}) => {
   const [buttons, setButtons] = useState([]);
+
+  useEffect(() => {
+    setValue(min);
+  }, [min, setValue]);
 
   useEffect(() => {
     const buttons = [min];
@@ -11,8 +21,6 @@ const Slider = ({ min = 0, max = 100, step = 1, buttonCount = 5 }) => {
     }
     setButtons(buttons);
   }, [buttonCount, max, min]);
-
-  useEffect(() => {});
 
   const ratio = (100 / (max - min)) * (value - min);
 

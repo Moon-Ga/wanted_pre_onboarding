@@ -1,26 +1,36 @@
 import { useRef, useState } from "react";
 
-const Input = () => {
-  const [isValid, setIsValid] = useState({ email: false, password: false });
+const Input = ({
+  inputEmail,
+  setInputEmail,
+  inputPassword,
+  setInputPassword,
+}) => {
+  const [isValid, setIsValid] = useState({ Email: false, Password: false });
   const [invalidAlert, setInvalidAlert] = useState({
-    email: false,
-    password: false,
+    Email: false,
+    Password: false,
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const passwordRef = useRef();
 
   const onInputChange = (e) => {
-    const inputType = e.target.type;
-    setIsValid({ ...isValid, [inputType]: e.target.validity.valid });
+    const { value, type } = e.target;
+    if (type === "email") {
+      setInputEmail(value);
+    } else {
+      setInputPassword(value);
+    }
+    setIsValid({ ...isValid, [type]: e.target.validity.valid });
   };
 
   const onInputBlur = (e) => {
-    const inputType = e.target.type;
-    if (isValid[inputType]) {
-      setInvalidAlert({ ...invalidAlert, [inputType]: false });
+    const { type } = e.target;
+    if (isValid[type]) {
+      setInvalidAlert({ ...invalidAlert, [type]: false });
     } else {
-      setInvalidAlert({ ...invalidAlert, [inputType]: true });
+      setInvalidAlert({ ...invalidAlert, [type]: true });
     }
   };
 

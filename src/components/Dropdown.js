@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const Dropdown = ({ list, placeholder, direction = "down" }) => {
+const Dropdown = ({
+  selected,
+  setSelected,
+  list,
+  placeholder = "Select an Item",
+  direction = "down",
+}) => {
   const [dropdownList, setdropdownList] = useState(list);
-  const [selected, setSelected] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
   const containerRef = useRef();
