@@ -1,6 +1,8 @@
 # 원티드 프리온보딩(wanted_pre_onboarding)
 
-사용 기술: Create React App, Tailwind CSS
+사용 기술: Create React App, Tailwind CSS  
+
+🛠 [리팩토링 버전](https://github.com/Moon-Ga/wanted_pre_onboarding_refactor)
 
 ## 1. 구현된 컴포넌트 확인 방법
 
